@@ -30,6 +30,18 @@ async function getBalance() {
         document.getElementById("output").innerHTML = error;
     }
 }
+
+async function getBalance() {
+    var address, wei, balance
+    address = document.getElementById("address").value;
+    wei = promisify(cb => web3.eth.getBalance(address, cb))
+    try {
+        balance = web3.fromWei(await wei, 'ether')
+        document.getElementById("output").innerHTML = balance + " ETH";
+    } catch (error) {
+        document.getElementById("output").innerHTML = error;
+    }
+}
 async function getERC20Balance() {
     var address, contractAddress, contractABI, tokenContract, decimals, balance, name, symbol, adjustedBalance
     address = document.getElementById("address").value
